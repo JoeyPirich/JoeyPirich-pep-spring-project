@@ -38,7 +38,22 @@ public class MessageService {
         }
     }
 
+    /**
+     * Provides a list of all messages in the database
+     * 
+     * @return list of messages, or null in case of failure
+     */
     public List<Message> getAllMessages() {
         return messageRepository.findAll();
+    }
+
+    /**
+     * Provides the message with the given ID if it is in the database,
+     * or null otherwise
+     * @param messageId
+     * @return message with ID if present, else null
+     */
+    public Message getMessageById(int messageId) {
+        return messageRepository.findById(messageId).orElse(null);
     }
 }
