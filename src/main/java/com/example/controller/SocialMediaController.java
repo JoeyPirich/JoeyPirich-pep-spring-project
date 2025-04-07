@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +45,6 @@ public class SocialMediaController {
         }
     }
 
-
     @PostMapping("/login")
     ResponseEntity<?> verifyLogin(@RequestBody Account account) {
         Account returnedAccount = accountService.verifyLogin(account);
@@ -54,7 +55,6 @@ public class SocialMediaController {
         }
     }
 
-
     @PostMapping("/messages")
     ResponseEntity<?> postMessage(@RequestBody Message message) {
         Message returnedMessage = messageService.createMessage(message);
@@ -63,5 +63,10 @@ public class SocialMediaController {
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(returnedMessage);
         }
+    }
+
+    @GetMapping("/messages")
+    List<Message> getAllMessages() {
+        return messageService.getAllMessages();
     }
 }
