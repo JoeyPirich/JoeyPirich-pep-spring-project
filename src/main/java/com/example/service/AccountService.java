@@ -19,14 +19,18 @@ public class AccountService {
 
     /**
      * Register a new account
+     * 
      * @param account
-     * @return the given account with its generated ID if registration successful, else null
+     * @return the given account with its generated ID if registration
+     * successful, else null
      * @throws UsernameTakenException if the given username is already taken
      */
-    public Account registerAccount(Account account) throws UsernameTakenException {
+    public Account registerAccount(Account account)
+        throws UsernameTakenException {
         if (!account.getUsername().isEmpty() 
             && account.getPassword().length() >= 4) {
-            if (accountRepository.findAccountByUsername(account.getUsername()) != null) {
+            if (accountRepository.findAccountByUsername(account.getUsername())
+                != null) {
                 throw new UsernameTakenException();
             } else {
                 return accountRepository.save(account);
@@ -36,7 +40,16 @@ public class AccountService {
         }
     }
 
+    /**
+     * Verify a login by comparing the given account against the database,
+     * returning a matching account if one is found with the same username and
+     * password
+     * 
+     * @param account
+     * @return account with matching username and password if found, else null
+     */
     public Account verifyLogin(Account account) {
-        return accountRepository.findAccountByUsernameAndPassword(account.getUsername(), account.getPassword());
+        return accountRepository.findAccountByUsernameAndPassword(
+            account.getUsername(), account.getPassword());
     }
 }

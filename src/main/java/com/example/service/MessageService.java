@@ -15,11 +15,12 @@ public class MessageService {
     private MessageRepository messageRepository;
 
     @Autowired
-    public MessageService(AccountRepository accountRepository, MessageRepository messageRepository){
+    public MessageService(AccountRepository accountRepository,
+        MessageRepository messageRepository) {
         this.accountRepository = accountRepository;
         this.messageRepository = messageRepository;
     }
-    
+
     /**
      * Add a message, only if its text is at least one and no more than 255
      * characters, and the user it is posted by actually exists in the
@@ -72,7 +73,7 @@ public class MessageService {
         return message;
     }
 
-        /**
+    /**
      * Edits the message with the given ID to have the given text. Returns the
      * edited messsage if successful, otherwise returns null (if ID not found,
      * the message is not within 1-255 characters, or an exception occurs)
