@@ -19,6 +19,7 @@ public class MessageService {
         this.accountRepository = accountRepository;
         this.messageRepository = messageRepository;
     }
+    
     /**
      * Add a message, only if its text is at least one and no more than 255
      * characters, and the user it is posted by actually exists in the
@@ -85,10 +86,18 @@ public class MessageService {
             Message message = this.getMessageById(messageId);
             if (message != null) {
                 message.setMessageText(messageText);
-                // TODO
                 return message;
             }
         }
         return null;
+    }
+
+    /**
+     * Returns a list of all messages posted by a user with a given ID
+     * @param postedBy
+     * @return list of messages, or null in case of exception
+     */
+    public List<Message> getAllMessagesByUser(int postedBy) {
+        return messageRepository.findMessagesByPostedBy(postedBy);
     }
 }

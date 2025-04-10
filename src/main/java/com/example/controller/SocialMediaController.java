@@ -89,9 +89,14 @@ public class SocialMediaController {
     ResponseEntity<?> patchMessageWithId(@PathVariable int id, @RequestBody Message message) {
         Message returnedMessage = messageService.editMessageWithId(id, message.getMessageText());
         if (returnedMessage == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Client error");
         } else {
             return ResponseEntity.status(HttpStatus.OK).body(1);
         }
+    }
+
+    @GetMapping("/accounts/{accountId}/messages")
+    List<Message> getAllMessagesByUser(@PathVariable int accountId) {
+        return messageService.getAllMessagesByUser(accountId);
     }
 }
